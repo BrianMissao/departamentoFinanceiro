@@ -4,6 +4,12 @@ import sun.reflect.generics.tree.VoidDescriptor;
 
 public class Funcionario {
     private String nome;
+
+    public int getId() {
+        return id;
+    }
+
+    private int id;
     private double salarioBruto;
     private double imposto;
     private double salarioLiquido;
@@ -15,7 +21,15 @@ public class Funcionario {
         this.salarioLiquido = salarioBruto - imposto;
     }
 
-    public void almentarSalarioComBaseNumaPorcentagemDada(int porcentagem) {
+    public Funcionario(String nome, int id, double salarioBruto) {
+        this.nome = nome;
+        this.id = id;
+        this.salarioBruto = salarioBruto;
+        this.imposto = 0.00;
+        this.salarioLiquido = salarioBruto - imposto;
+    }
+
+    public void aumentarSalarioComBaseEmUmaPorcentagemDada(int porcentagem) {
         this.salarioBruto += salarioBruto*porcentagem/100;
     }
 
