@@ -29,8 +29,8 @@ public class Funcionario {
         this.salarioLiquido = salarioBruto - imposto;
     }
 
-    public void aumentarSalarioComBaseEmUmaPorcentagemDada(int porcentagem) {
-        this.salarioBruto += salarioBruto*porcentagem/100;
+    public void atualizarSalarioBruto(double novoSalarioBruto) {
+        this.salarioBruto = novoSalarioBruto;
     }
 
     public void atualizarSalario() {

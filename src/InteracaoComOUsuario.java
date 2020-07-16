@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class InteracaoComOUsuario {
     private static Scanner scanner = new Scanner(System.in);
     private static Funcionario funcionario;
-    private static List<Funcionario> listaDeFuncionarios = new ArrayList<>();
+    private static List<Funcionario> funcionarios = new ArrayList<>();
 
     public static void main(String[] args) {
         int numeroDeFuncionariosAAdicionar = Integer.parseInt(obterDados("Digite o número de funcionários que deseja adicionar:"));
@@ -19,10 +19,11 @@ public class InteracaoComOUsuario {
 
     private static void aumentarSalarioDoFuncionario() {
         int idDoFuncionarioATerOSalarioAumentado = Integer.parseInt(obterDados("Digite o ID do felizardo:"));
-        for (Funcionario funcionario : listaDeFuncionarios) {
+        for (Funcionario funcionario : funcionarios) {
             if (funcionario.getId() == idDoFuncionarioATerOSalarioAumentado) {
                 int porcentagemDeAumento = Integer.parseInt(obterDados("Digite a porcentagem a aumentar:"));
-                funcionario.aumentarSalarioComBaseEmUmaPorcentagemDada(porcentagemDeAumento);
+                double noboSalario = (funcionario.getSalarioBruto()+funcionario.getSalarioBruto()*porcentagemDeAumento/100);
+                funcionario.atualizarSalarioBruto(noboSalario);
                 System.out.println("Operação realizada com sucesso!");
                 return;
             }
@@ -32,7 +33,7 @@ public class InteracaoComOUsuario {
 
     private static void imprimirListaDeFuncionarios() {
         int numeroDoFuncionarioSendoImpresso = 1;
-        for (Funcionario funcionario : listaDeFuncionarios) {
+        for (Funcionario funcionario : funcionarios) {
             System.out.printf("*Funcionário de número %d%nID: %d%nNome: %s%nSalário: %.2f%n", numeroDoFuncionarioSendoImpresso, funcionario.getId(), funcionario.getNome(), funcionario.getSalarioBruto());
             numeroDoFuncionarioSendoImpresso++;
         }
@@ -52,14 +53,14 @@ public class InteracaoComOUsuario {
             }
             String nomeFuncionario = obterDados("Digite o nome do Funcionário:");
             double salarioDoFuncionario = Double.parseDouble(obterDados("Digite o salário:"));
-            listaDeFuncionarios.add(new Funcionario(nomeFuncionario, idFuncionario, salarioDoFuncionario));
+            funcionarios.add(new Funcionario(nomeFuncionario, idFuncionario, salarioDoFuncionario));
             System.out.println("Funcionário adicionado com sucesso!");
             numeroDoFuncionarioSendoAdicionado++;
         }
     }
 
     private static boolean idJaExiste(int idFuncionario) {
-        for (Funcionario funcionario : listaDeFuncionarios) {
+        for (Funcionario funcionario : funcionarios) {
             if (funcionario.getId() == idFuncionario) {
                 return true;
             }
